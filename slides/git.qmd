@@ -1,0 +1,1806 @@
+---
+title: "Introduction to Git"
+subtitle: "Version Control for Modern Development"
+author: "University of Southern Maine"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: images/git-logo.png
+    css: styles.css
+    footer: "Git Tutorial - 2026"
+    transition: slide
+    incremental: false
+---
+
+## What is Git?
+
+Git is a **distributed version control system** (DVCS)
+
+::: {.incremental}
+- Tracks changes to files over time
+- Enables collaboration among multiple developers
+- Allows reverting to specific versions
+- Works with both local and remote repositories
+- Created by Linus Torvalds in 2005
+:::
+
+::: {.notes}
+Git is fundamentally different from older centralized version control systems like SVN. Every developer has a complete copy of the repository history.
+:::
+
+## Git vs GitHub
+
+::: {.columns}
+::: {.column width="50%"}
+### Git
+- Version control **system**
+- Command-line tool
+- Runs locally
+- Open source
+- Works offline
+:::
+
+::: {.column width="50%"}
+### GitHub
+- Hosting **platform**
+- Web interface
+- Cloud-based
+- Microsoft-owned
+- Requires internet
+:::
+:::
+
+::: {.callout-note}
+Other platforms: GitLab, Bitbucket, Gitea, etc.
+:::
+
+
+
+
+
+# Getting Started
+## Installation
+
+**Download from:** [git-scm.com/downloads](https://git-scm.com/downloads)
+
+**Or install via package manager:**
+
+::: {.columns}
+::: {.column width="50%"}
+**Linux (Debian/Ubuntu):**
+```bash
+sudo apt update
+sudo apt install git
+```
+
+**Linux (Fedora/RHEL):**
+```bash
+sudo dnf install git
+```
+
+**Linux (Arch):**
+```bash
+sudo pacman -S git
+```
+:::
+
+::: {.column width="50%"}
+**macOS (Homebrew):**
+```bash
+brew install git
+```
+
+**macOS (Xcode):**
+```bash
+xcode-select --install
+```
+
+**Windows:**
+- Download installer from git-scm.com
+- Or use: `winget install Git.Git`
+:::
+:::
+
+
+
+
+
+## Verify Installation
+
+**Verify installation:**
+```bash
+git --version
+```
+
+Expected output (example):
+```
+git version 2.45.0
+```
+
+::: {.callout-tip}
+As of 2025, Git 2.34+ is required for SSH commit signing. Make sure you're on a recent version.
+:::
+
+
+
+
+
+
+## Initial Configuration
+
+Set your identity (required):
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+```
+
+View your configuration:
+
+```bash
+git config --list
+```
+
+::: {.callout-tip}
+The `--global` flag applies settings to all repositories on your machine. Omit it to configure a specific repository.
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+# Core Concepts
+## Repository Basics
+
+**Repository** = A version-controlled project
+
+::: {.incremental}
+- **Local repository**: On your machine (`.git` directory)
+- **Remote repository**: Hosted on GitHub, GitLab, etc.
+- **Working directory**: Your actual project files
+- **Staging area**: Files prepared for commit
+:::
+
+
+
+
+
+## Creating a Repository
+### New repository
+```bash
+mkdir myproject
+cd myproject
+git init
+```
+
+Creates a hidden `.git` directory for tracking changes
+
+### Clone existing repository
+```bash
+git clone https://github.com/user/repo.git
+```
+
+
+
+
+
+## Checking Status
+
+See the current state of your repository:
+
+```bash
+git status
+```
+
+Shows:
+
+::: {.incremental}
+- Which branch you're on
+- Staged changes (ready to commit)
+- Unstaged changes (modified but not staged)
+- Untracked files (new files Git doesn't know about)
+:::
+
+
+
+
+
+# The Git Workflow
+## Three-Stage Architecture
+
+```{mermaid}
+%%| fig-width: 10
+flowchart LR
+    A[Working Directory] -->|git add| B[Staging Area]
+    B -->|git commit| C[Local Repository]
+    C -->|git push| D[Remote Repository]
+    D -->|git pull| A
+```
+
+## Staging Changes
+
+Add specific file:
+```bash
+git add filename.txt
+```
+
+Add multiple files:
+```bash
+git add file1.js file2.css
+```
+
+Add all changes:
+```bash
+git add .
+```
+
+::: {.callout-warning}
+Be careful with `git add .` - review what you're adding with `git status` first!
+:::
+
+
+
+
+
+
+
+## Committing Changes
+
+Create a snapshot with a message:
+
+```bash
+git commit -m "Add user authentication feature"
+```
+
+::: {.callout-tip title="Good Commit Messages"}
+- Use present tense: "Add feature" not "Added feature"
+- Be descriptive but concise
+- First line < 50 characters
+- Add details in body if needed
+:::
+
+
+
+
+
+## Viewing History
+
+See all commits:
+```bash
+git log
+```
+
+Compact view:
+```bash
+git log --oneline
+```
+
+With graph visualization:
+```bash
+git log --graph --oneline --all
+```
+
+
+
+
+
+
+
+
+
+
+
+# Branching and Merging
+## Why Branches?
+
+::: {.incremental}
+- Work on features without affecting main code
+- Experiment safely
+- Collaborate without conflicts
+- Organize different development streams
+:::
+
+```{mermaid}
+%%| fig-width: 8
+gitGraph
+    commit
+    commit
+    branch feature
+    checkout feature
+    commit
+    commit
+    checkout main
+    merge feature
+    commit
+```
+
+## Branch Operations
+
+Create a branch:
+```bash
+git branch feature-login
+```
+
+Create and switch to branch:
+```bash
+git checkout -b feature-login
+# or (Git 2.23+)
+git switch -c feature-login
+```
+
+List branches:
+```bash
+git branch
+```
+
+
+
+
+
+## Switching Branches
+
+Old way:
+```bash
+git checkout main
+```
+
+New way (Git 2.23+):
+```bash
+git switch main
+```
+
+::: {.callout-note}
+`git switch` was introduced to make branch operations clearer, separating it from `checkout`'s other uses.
+:::
+
+
+
+
+
+
+
+## Merging Branches
+
+1. Switch to target branch (usually `main`):
+```bash
+git switch main
+```
+
+2. Merge the feature branch:
+```bash
+git merge feature-login
+```
+
+3. Delete the merged branch:
+```bash
+git branch -d feature-login
+```
+
+
+
+
+
+## Merge Conflicts
+
+When Git can't automatically merge:
+
+```bash
+<<<<<<< HEAD
+Current branch content
+=======
+Incoming branch content
+>>>>>>> feature-branch
+```
+
+**Resolution steps:**
+
+1. Open conflicted files
+2. Choose which changes to keep
+3. Remove conflict markers
+4. Stage the resolved files: `git add filename`
+5. Complete the merge: `git commit`
+
+
+
+
+
+
+
+
+# Remote Repositories
+## Remote Operations
+
+Add a remote:
+```bash
+git remote add origin https://github.com/user/repo.git
+```
+
+View remotes:
+```bash
+git remote -v
+```
+
+Remove a remote:
+```bash
+git remote remove origin
+```
+
+
+
+
+
+
+## Pushing Changes
+
+Push to remote:
+```bash
+git push origin main
+```
+
+Set upstream (track remote branch):
+```bash
+git push -u origin main
+```
+
+After setting upstream, just use:
+```bash
+git push
+```
+
+
+
+
+
+
+
+
+## Pulling Changes
+
+Fetch and merge changes:
+```bash
+git pull origin main
+```
+
+::: {.callout-important}
+`git pull` = `git fetch` + `git merge`
+
+Use `git fetch` to see changes without merging them immediately.
+:::
+
+
+
+
+
+
+
+
+## Pull with Rebase
+
+To keep a linear history:
+
+```bash
+git pull --rebase origin main
+```
+
+This applies your commits on top of remote changes instead of creating a merge commit.
+
+::: {.callout-tip}
+Use rebase for personal branches, merge for shared branches.
+:::
+
+
+
+
+
+
+
+
+# Setting Up SSH for GitHub
+## Why Use SSH?
+
+::: {.columns}
+::: {.column width="50%"}
+**SSH Benefits**
+- No password prompts
+- More secure than HTTPS
+- Encrypted connection
+- Key-based authentication
+:::
+
+::: {.column width="50%"}
+**HTTPS Drawbacks**
+- Requires Personal Access Token
+- Token management needed
+- Less convenient
+- Token can expire
+:::
+:::
+
+::: {.callout-note}
+GitHub deprecated password authentication in August 2021. Use SSH or Personal Access Tokens.
+:::
+
+
+
+
+
+
+
+
+
+## Checking for Existing SSH Keys
+
+First, check if you already have SSH keys:
+
+```bash
+ls -la ~/.ssh
+```
+
+Look for files like:
+- `id_ed25519` and `id_ed25519.pub` (Ed25519 - recommended)
+- `id_rsa` and `id_rsa.pub` (RSA - older)
+
+::: {.callout-tip}
+Ed25519 keys are recommended in 2025 - they're more secure and faster than RSA.
+:::
+
+
+
+
+
+
+
+
+
+## Generating a New SSH Key
+
+**Recommended (Ed25519):**
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+**For older systems (RSA):**
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
+When prompted:
+
+1. Press Enter to accept default location
+2. Enter a secure passphrase (recommended)
+3. Confirm passphrase
+
+
+
+
+
+
+
+
+
+
+## Adding SSH Key to ssh-agent
+
+**macOS/Linux:**
+```bash
+# Start ssh-agent
+eval "$(ssh-agent -s)"
+
+# Add your key (Ed25519 example)
+ssh-add ~/.ssh/id_ed25519
+```
+
+**macOS with Keychain:**
+```bash
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+```
+
+**Windows (PowerShell as Admin):**
+```bash
+# Start ssh-agent
+Get-Service ssh-agent | Set-Service -StartupType Automatic
+Start-Service ssh-agent
+
+# Add key
+ssh-add ~/.ssh/id_ed25519
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Adding SSH Key to GitHub
+
+**Copy your public key:**
+
+```bash
+# macOS
+pbcopy < ~/.ssh/id_ed25519.pub
+
+# Linux (with xclip)
+xclip -sel clip < ~/.ssh/id_ed25519.pub
+
+# Windows (Git Bash)
+cat ~/.ssh/id_ed25519.pub | clip
+
+# Or just display and copy manually
+cat ~/.ssh/id_ed25519.pub
+```
+
+
+
+
+
+
+
+
+
+
+## Adding to GitHub (cont.)
+
+1. Go to GitHub.com → **Settings**
+2. Click **SSH and GPG keys** (left sidebar)
+3. Click **New SSH key**
+4. Add a descriptive title (e.g., "Personal Laptop")
+5. Select key type: **Authentication Key**
+6. Paste your public key
+7. Click **Add SSH key**
+
+
+
+
+
+
+
+
+## Testing Your SSH Connection
+
+```bash
+ssh -T git@github.com
+```
+
+Expected output:
+```
+Hi username! You've successfully authenticated, 
+but GitHub does not provide shell access.
+```
+
+::: {.callout-important}
+This is normal - GitHub doesn't allow shell access, only Git operations.
+:::
+
+
+
+
+
+
+
+
+## Using SSH URLs
+
+When cloning, use SSH format:
+
+```bash
+# SSH format (recommended)
+git clone git@github.com:username/repo.git
+
+# NOT HTTPS format
+git clone https://github.com/username/repo.git
+```
+
+**Convert existing repo to SSH:**
+```bash
+git remote set-url origin git@github.com:username/repo.git
+```
+
+
+
+
+
+
+
+
+
+
+
+## SSH Configuration (Optional)
+
+Create/edit `~/.ssh/config`:
+
+```
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+```
+
+Benefits:
+
+- Specify which key to use
+- Multiple GitHub accounts support
+- Custom settings per host
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Making Your First Contribution
+## Fork → Clone → Edit → PR Workflow
+
+This is the standard workflow for contributing to open-source projects:
+
+```{mermaid}
+%%| fig-width: 10
+flowchart LR
+    A[Fork Repository] --> B[Clone to Local]
+    B --> C[Create Branch]
+    C --> D[Make Changes]
+    D --> E[Commit Changes]
+    E --> F[Push to Fork]
+    F --> G[Create Pull Request]
+```
+
+::: {.notes}
+Based on the "First Contributions" project - helping beginners make their first open-source contribution.
+:::
+
+
+
+
+
+
+## Step 1: Fork the Repository
+
+**On GitHub:**
+1. Navigate to the repository you want to contribute to
+2. Click the **Fork** button (top right)
+3. This creates a copy in your GitHub account
+
+::: {.callout-note}
+Forking creates an independent copy - you can experiment freely!
+:::
+
+
+
+
+
+
+## Step 2: Clone Your Fork
+
+```bash
+# Clone YOUR fork (not the original)
+git clone git@github.com:YOUR-USERNAME/repository-name.git
+
+# Example
+git clone git@github.com:jane-doe/first-contributions.git
+
+# Enter the repository
+cd repository-name
+```
+
+::: {.callout-tip}
+Use SSH URLs for easier authentication!
+:::
+
+
+
+
+
+
+## Step 3: Create a Branch
+
+```bash
+# Create and switch to a new branch
+git switch -c your-branch-name
+
+# Example with descriptive name
+git switch -c add-jane-doe
+```
+
+**For older Git versions:**
+```bash
+git checkout -b your-branch-name
+```
+
+::: {.callout-important}
+Always create a new branch for your changes - never work directly on `main`!
+:::
+
+
+
+
+
+
+
+## Step 4: Make Your Changes
+
+1. Edit the files you need to change
+2. Save your work
+
+**Check what changed:**
+```bash
+git status
+```
+
+Shows:
+
+- Modified files
+- New files
+- Deleted files
+
+
+
+
+
+
+
+
+## Step 5: Commit Your Changes
+
+```bash
+# Stage your changes
+git add filename.txt
+# or stage all changes
+git add .
+
+# Commit with descriptive message
+git commit -m "Add Jane Doe to contributors list"
+```
+
+::: {.callout-tip}
+Write clear commit messages describing *what* and *why* you changed something.
+:::
+
+
+
+
+
+
+
+
+
+## Step 6: Push to Your Fork
+
+```bash
+# Push your branch to YOUR fork on GitHub
+git push -u origin your-branch-name
+
+# Example
+git push -u origin add-jane-doe
+```
+
+The `-u` flag sets up tracking so you can use `git push` next time.
+
+
+
+
+
+
+
+
+
+
+## Step 7: Create Pull Request
+
+**On GitHub:**
+
+1. Go to **your fork** on GitHub
+2. You'll see: "**Compare & pull request**" button
+3. Click it
+4. Review your changes
+5. Write a description of what you did
+6. Click "**Create pull request**"
+
+## Pull Request Best Practices
+
+::: {.incremental}
+- **Clear title**: Describe what the PR does
+- **Good description**: Explain why the change is needed
+- **Link issues**: Reference related issues (#123)
+- **Small changes**: Keep PRs focused and manageable
+- **Follow guidelines**: Check CONTRIBUTING.md
+- **Be patient**: Wait for review feedback
+- **Respond to feedback**: Address reviewer comments
+:::
+
+
+
+
+
+
+
+
+
+
+## After Your PR is Merged
+
+**Clean up your local repository:**
+
+```bash
+# Switch back to main
+git switch main
+
+# Pull the updated main branch
+git pull upstream main
+# or if no upstream
+git pull origin main
+
+# Delete your feature branch (optional)
+git branch -d add-jane-doe
+```
+
+
+
+
+
+
+
+
+
+
+
+
+## Keeping Your Fork Updated
+
+Add the original repository as "upstream":
+
+```bash
+# Add upstream remote (one time only)
+git remote add upstream git@github.com:ORIGINAL-OWNER/REPO.git
+
+# Fetch changes from upstream
+git fetch upstream
+
+# Merge upstream changes into your main
+git switch main
+git merge upstream/main
+
+# Push updates to your fork
+git push origin main
+```
+
+
+
+
+
+
+
+
+
+
+## Common Contribution Workflow Issues
+
+**Merge conflicts:**
+- Occur when main branch changed since you forked
+- Update your branch: `git merge main`
+- Resolve conflicts in files
+- Commit the resolution
+
+**PR rejected:**
+- Read feedback carefully
+- Make requested changes
+- Commit and push to same branch
+- PR updates automatically
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Signed Commits
+## Why Sign Commits?
+
+::: {.incremental}
+- **Authentication**: Prove you made the commit
+- **Integrity**: Verify commits haven't been tampered with
+- **Trust**: Essential for security-critical projects
+- **Accountability**: Prevent impersonation
+:::
+
+::: {.callout-note}
+Anyone with push rights can commit as any author. Signing prevents this!
+:::
+
+
+
+
+
+
+
+
+
+
+
+## Signing Methods (2025)
+
+Git supports **three** methods:
+
+::: {.incremental}
+1. **GPG** (GNU Privacy Guard)
+   - Most widely supported
+   - Works on all platforms
+   - More complex setup
+
+2. **SSH** (Git 2.34+)
+   - Simpler setup
+   - Reuse existing SSH keys
+   - Supported by GitHub, GitLab, Bitbucket
+
+3. **S/MIME**
+   - Corporate environments
+   - Certificate-based
+:::
+
+::: {.notes}
+SSH signing is a Git feature, not GitHub-specific. GitHub/GitLab verify and display signatures.
+:::
+
+
+
+
+
+
+
+## GPG Signing Setup
+
+**Generate a GPG key:**
+```bash
+gpg --full-generate-key
+```
+
+**List your keys:**
+```bash
+gpg --list-secret-keys --keyid-format=long
+```
+
+**Configure Git:**
+```bash
+git config --global user.signingkey YOUR_KEY_ID
+git config --global commit.gpgsign true
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Exporting GPG Public Key
+
+**Export for GitHub/GitLab:**
+```bash
+gpg --armor --export YOUR_KEY_ID
+```
+
+Copy the output and add to:
+- GitHub: Settings → SSH and GPG keys
+- GitLab: Preferences → GPG Keys
+
+
+
+
+
+
+
+
+
+
+
+
+## SSH Signing Setup
+
+**Tell Git to use SSH:**
+```bash
+git config --global gpg.format ssh
+git config --global user.signingkey ~/.ssh/id_ed25519.pub
+```
+
+**Enable automatic signing:**
+```bash
+git config --global commit.gpgsign true
+```
+
+Add your public key to GitHub/GitLab as a **Signing Key** (not just authentication)
+
+::: {.callout-tip}
+SSH signing is much simpler! No GPG agent needed.
+:::
+
+
+
+
+
+
+
+
+
+
+## Making Signed Commits
+
+**Manual signing:**
+```bash
+git commit -S -m "Signed commit message"
+```
+
+**Automatic signing** (recommended):
+```bash
+git config --global commit.gpgsign true
+# Now all commits are signed automatically
+```
+
+**Verify signatures:**
+```bash
+git log --show-signature
+```
+
+
+
+
+
+
+
+
+
+## Signature Verification
+
+On GitHub/GitLab, signed commits show:
+
+- ✅ **Verified** - Valid signature
+- ⚠️ **Unverified** - No signature or can't verify
+- ❌ **Invalid** - Signature doesn't match
+
+::: {.callout-note}
+Verification requires your public key to be uploaded to the platform.
+:::
+
+# Advanced Topics
+
+## .gitignore
+
+Ignore files Git shouldn't track:
+
+```bash
+# Create .gitignore file
+touch .gitignore
+```
+
+Example contents:
+```
+# Build outputs
+*.log
+build/
+dist/
+
+# Dependencies
+node_modules/
+venv/
+
+# Environment files
+.env
+secrets.json
+
+# OS files
+.DS_Store
+Thumbs.db
+```
+
+
+
+
+
+
+
+
+
+
+
+
+## Removing Tracked Files
+
+If you accidentally committed a file that should be ignored:
+
+```bash
+git rm --cached filename
+```
+
+Then add it to `.gitignore` and commit:
+
+```bash
+echo "filename" >> .gitignore
+git add .gitignore
+git commit -m "Stop tracking filename"
+```
+
+
+
+
+
+
+
+
+
+
+
+
+## Stashing Changes
+
+Save changes without committing:
+
+```bash
+git stash
+```
+
+List stashes:
+```bash
+git stash list
+```
+
+Reapply stashed changes:
+```bash
+git stash apply
+# or
+git stash pop  # applies and removes from stash
+```
+
+
+
+
+
+
+
+
+
+
+
+## Tagging Releases
+
+Create an annotated tag:
+```bash
+git tag -a v1.0.0 -m "Release version 1.0.0"
+```
+
+Push tags to remote:
+```bash
+git push origin v1.0.0
+# or push all tags
+git push --tags
+```
+
+List tags:
+```bash
+git tag
+```
+
+
+
+
+
+
+
+
+
+
+
+
+## Cherry-Pick
+
+Apply a specific commit to current branch:
+
+```bash
+git cherry-pick <commit-hash>
+```
+
+Useful for:
+- Applying bug fixes to multiple branches
+- Selectively bringing in features
+
+::: {.callout-warning}
+Use sparingly - can duplicate commits and complicate history
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Undoing Changes
+
+**Unstage a file:**
+```bash
+git restore --staged filename
+```
+
+**Discard working directory changes:**
+```bash
+git restore filename
+```
+
+**Undo last commit (keep changes):**
+```bash
+git reset --soft HEAD~1
+```
+
+**Undo last commit (discard changes):**
+```bash
+git reset --hard HEAD~1
+```
+
+
+
+
+
+
+
+
+
+
+## Finding Lost Commits
+
+Git keeps a history of everything:
+
+```bash
+git reflog
+```
+
+Recover a lost commit:
+```bash
+git checkout <commit-hash>
+# or create a branch from it
+git checkout -b recovered-branch <commit-hash>
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Workflows and Best Practices
+## Common Workflows
+
+::: {.columns}
+::: {.column width="50%"}
+**Feature Branch Workflow**
+- Main branch always stable
+- Each feature in own branch
+- Merge via pull requests
+- Code review before merge
+:::
+
+::: {.column width="50%"}
+**Trunk-Based Development**
+- All work on main branch
+- Short-lived feature branches
+- Continuous integration
+- Feature flags for WIP
+:::
+:::
+
+::: {.notes}
+Gitflow (develop/main branches) has fallen out of favor for most teams. Trunk-based is now considered best practice for CI/CD.
+:::
+
+
+
+
+
+
+
+
+
+
+
+## Commit Best Practices
+
+::: {.incremental}
+1. **Commit often** - Small, logical units of work
+2. **Write clear messages** - Explain *why*, not just *what*
+3. **One concern per commit** - Keep commits focused
+4. **Test before committing** - Don't break the build
+5. **Sign your commits** - Especially for public projects
+:::
+
+
+
+
+
+
+
+
+
+
+
+## Branch Naming Conventions
+
+Use prefixes for clarity:
+
+```
+feature/user-authentication
+bugfix/login-error
+hotfix/security-patch
+release/v2.0.0
+```
+
+::: {.callout-tip}
+Agree on conventions with your team and stick to them!
+:::
+
+## Pull Request Best Practices
+
+::: {.incremental}
+- Keep PRs small (< 400 lines changed)
+- Provide clear description
+- Link to issues/tickets
+- Request specific reviewers
+- Respond to feedback promptly
+- Update branch before merging
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Example Workflows
+## Basic Workflow
+
+```bash
+# 1. Create project
+mkdir myproject && cd myproject
+git init
+
+# 2. Create files
+echo "# My Project" > README.md
+git add README.md
+git commit -m "Initial commit"
+
+# 3. Connect to remote
+git remote add origin https://github.com/user/myproject.git
+git push -u origin main
+```
+
+## Feature Branch Workflow
+
+```bash
+# 1. Start new feature
+git switch -c feature-login
+
+# 2. Make changes
+echo "Login code..." > login.js
+git add login.js
+git commit -S -m "Add login functionality"
+
+# 3. Push and create PR
+git push -u origin feature-login
+# Then create Pull Request on GitHub
+
+# 4. After PR approved
+git switch main
+git pull
+git branch -d feature-login
+```
+
+
+
+
+
+
+
+
+
+
+
+
+## Hotfix Workflow
+
+```bash
+# 1. Create hotfix branch from main
+git switch main
+git switch -c hotfix-security-patch
+
+# 2. Fix the issue
+# ... make changes ...
+git add .
+git commit -S -m "Fix security vulnerability"
+
+# 3. Merge to main and develop
+git switch main
+git merge hotfix-security-patch
+git push
+
+# 4. Tag the release
+git tag -a v1.0.1 -m "Security patch"
+git push --tags
+
+# 5. Clean up
+git branch -d hotfix-security-patch
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Troubleshooting
+## Common Issues
+
+**Detached HEAD State**
+```bash
+# You're not on a branch!
+git switch -c new-branch-name
+# or
+git switch main
+```
+
+**Merge Conflicts**
+```bash
+# After resolving conflicts in files:
+git add .
+git commit
+```
+
+
+
+
+
+
+
+
+
+
+
+
+## Authentication Issues
+
+**HTTPS authentication:**
+- Use Personal Access Tokens (not passwords)
+- GitHub deprecated password authentication in 2021
+
+**SSH authentication:**
+```bash
+# Generate SSH key
+ssh-keygen -t ed25519 -C "your@email.com"
+
+# Add to ssh-agent
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+
+# Copy public key to GitHub
+cat ~/.ssh/id_ed25519.pub
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Large Repositories
+
+**Clone with shallow history:**
+```bash
+git clone --depth 1 https://github.com/user/repo.git
+```
+
+**Sparse checkout** (specific directories only):
+```bash
+git clone --filter=blob:none --sparse https://github.com/user/repo.git
+cd repo
+git sparse-checkout add path/to/dir
+```
+
+
+
+
+
+
+
+
+
+
+
+
+# Resources and Next Steps
+## Essential Commands Summary
+
+```bash
+# Setup
+git config --global user.name "Name"
+git init / git clone
+
+# Basic workflow
+git status / git add / git commit / git push / git pull
+
+# Branching
+git branch / git switch / git merge
+
+# Signing
+git config --global commit.gpgsign true
+
+# History
+git log / git reflog
+
+# Undo
+git restore / git reset / git revert
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Learning Resources
+
+::: {.nonincremental}
+- [Official Git Documentation](https://git-scm.com/doc)
+- [Pro Git Book](https://git-scm.com/book/en/v2) (Free)
+- [GitHub Skills](https://skills.github.com/)
+- [Learn Git Branching](https://learngitbranching.js.org/) (Interactive)
+- [Oh My Git!](https://ohmygit.org/) (Game-based learning)
+:::
+
+## Practice Exercises
+
+1. **Set up SSH for GitHub**
+   - Generate an Ed25519 SSH key
+   - Add the public key to your GitHub account
+   - Test the connection
+
+2. **Make your first contribution**
+   - Fork the [First Contributions](https://github.com/firstcontributions/first-contributions) repository
+   - Clone your fork using SSH
+   - Add your name to Contributors.md
+   - Create a pull request
+
+## More Practice
+
+3. **Basic Git workflow**
+   - Create a repository and make several commits
+   - Practice branching and merging
+   - Use `.gitignore` effectively
+
+4. **Sign your commits**
+   - Set up signed commits (GPG or SSH)
+   - Make a signed commit
+   - Verify the signature
+
+5. **Advanced operations**
+   - Simulate merge conflicts and resolve them
+   - Use stash to save work in progress
+   - Tag a release and push to remote
+   - Practice undoing changes safely
+
+## Where to Practice?
+
+::: {.nonincremental}
+- **First Contributions** - Perfect for beginners
+  - [github.com/firstcontributions/first-contributions](https://github.com/firstcontributions/first-contributions)
+
+- **Good First Issue** projects
+  - Look for `good-first-issue` labels
+  - Real open-source projects
+
+- **Personal projects**
+  - Create your own repository
+  - Experiment freely
+  - Build your portfolio
+:::
+
+## Key Takeaways
+
+::: {.incremental}
+- Git is essential for modern development
+- SSH makes authentication seamless
+- Fork → Clone → Edit → PR is standard workflow
+- Commit early and often
+- Use branches for all features/fixes
+- Sign commits for security (SSH is easiest)
+- Pull before you push
+- Read commit messages before merging
+- Contributing to open-source builds skills!
+:::
+
+## Questions?
+
+::: {.nonincremental}
+**Additional Resources:**
+- Git documentation: [git-scm.com](https://git-scm.com)
+- First Contributions: [firstcontributions.github.io](https://firstcontributions.github.io)
+- GitHub Docs: [docs.github.com](https://docs.github.com)
+- This presentation: [github.com/yourname/git-tutorial](https://github.com)
+:::
+
+::: {.notes}
+Encourage students to make their first contribution today! The First Contributions project is perfect for getting started.
+:::
