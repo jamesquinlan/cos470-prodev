@@ -1,5 +1,5 @@
 # COS 470 Professional Development Course (Notes)
-From Brightspace:
+From Brightspace (Course Description):
 
 This career development course prepares computer science students for professional success in in-
 dustry and academia. Students will develop and refine essential career materials, including résumés
