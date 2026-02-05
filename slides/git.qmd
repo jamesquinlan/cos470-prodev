@@ -28,7 +28,7 @@ Git is a **distributed version control system** (DVCS)
 :::
 
 ::: {.notes}
-Git is fundamentally different from older centralized version control systems like SVN. Every developer has a complete copy of the repository history.
+Git is fundamentally different from older centralized version control systems like SVN. The core idea is every developer has a complete copy of the repository history locally.
 :::
 
 ## Git vs GitHub
@@ -50,6 +50,7 @@ Git is fundamentally different from older centralized version control systems li
 - Cloud-based
 - Microsoft-owned
 - Requires internet
+- Alternatives such as GitLab exist
 :::
 :::
 
