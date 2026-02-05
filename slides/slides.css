@@ -14,7 +14,7 @@
 .reveal .title-slide .author,
 .reveal .title-slide .date {
     font-size: 1em;       /* Author and date/lecture number */
-    color: #333333;
+    color: #00FF03; /* changed color by HA, new color = Lime */
     margin-top: 0.5em;
 }
 
