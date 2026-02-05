@@ -1,13 +1,11 @@
 /* Title slide */
 .reveal .title-slide h1 {
     font-size: 3em;       /* Main title */
-    color: #003366;
     margin-bottom: 0.2em;
 }
 
 .reveal .title-slide h2 {
     font-size: 2em;       /* Subtitle */
-    color: #0055aa;
     margin-top: 0;
 }
 

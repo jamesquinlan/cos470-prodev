@@ -1,11 +1,11 @@
 /*-- scss:defaults --*/
 
 // Color palette
-$primary: #f05032;        // Git orange
-$secondary: #3e3e3e;      // Dark gray
-$accent: #f34f29;         // Git red
-$background: #ffffff;
-$text: #2c3e50;
+$primary: #7fcc6a;        // light green
+$secondary: #7375bf;      // blue
+$accent: #5f9950;         // darker green
+$background: #3e3e3e; // bg
+$text: #faf9ed;
 
 // Fonts "Segoe UI", "Helvetica Neue", 
 $font-family-sans-serif: Arial, sans-serif;
@@ -19,9 +19,6 @@ $presentation-font-size-root: 38px;  // Base font size (default is usually 40px)
 $presentation-h1-font-size: 2.0em;   // Level 1 headers (default ~2.5em)
 $presentation-h2-font-size: 1.4em;   // Level 2 headers (default ~1.6em)
 $presentation-h3-font-size: 1.1em;   // Level 3 headers (default ~1.3em)
-
-
-
 
 $presentation-heading-color: $secondary;
 $link-color: $primary;
