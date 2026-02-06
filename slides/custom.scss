@@ -14,14 +14,10 @@ $font-family-monospace: "Fira Code", "Source Code Pro", Monaco, monospace;
 // Font sizes - adjust these to change text size
 $presentation-font-size-root: 38px;  // Base font size (default is usually 40px)
 
-
 // Header font sizes - adjust these to change heading sizes
 $presentation-h1-font-size: 2.0em;   // Level 1 headers (default ~2.5em)
 $presentation-h2-font-size: 1.4em;   // Level 2 headers (default ~1.6em)
 $presentation-h3-font-size: 1.1em;   // Level 3 headers (default ~1.3em)
-
-
-
 
 $presentation-heading-color: $secondary;
 $link-color: $primary;

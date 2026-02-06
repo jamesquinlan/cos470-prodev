@@ -1,20 +1,20 @@
 /* Title slide */
 .reveal .title-slide h1 {
     font-size: 3em;       /* Main title */
-    color: #333333;
+    color: #ff0000;
     margin-bottom: 0.2em;
 }
 
 .reveal .title-slide h2 {
     font-size: 2em;       /* Subtitle */
-    color: #0055aa;
+    color: #aa0000;
     margin-top: 0;
 }
 
 .reveal .title-slide .author,
 .reveal .title-slide .date {
     font-size: 1em;       /* Author and date/lecture number */
-    color: #00FF03; /* changed color by HA, new color = Lime */
+    color: #00d9ff;
     margin-top: 0.5em;
 }
 
