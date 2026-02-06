@@ -2,7 +2,7 @@
 
 .reveal .title-slide h1 {
     font-size: 3em;       /* Main title */
-    color: #ff0000;
+    color: #009688; /*Replaced Red with Teal */
     margin-bottom: 0.2em;
 }
 
@@ -16,7 +16,7 @@
 .reveal .title-slide .date {
     font-size: 1em;       /* Author and date/lecture number */
     color: #00d9ff;
-    margin-top: 0.5em;
+    margin-top: 1em; /*Changed 0.5em to 1em
 }
 
 /* Other slides */
