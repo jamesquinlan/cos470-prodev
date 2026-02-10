@@ -25,7 +25,7 @@ Make sure you have a ssh key.
   ssh-keygen -t ed25519 -C "description or email"
 ```
 
-Copy this generated public key to GitHub.  It is found in:
+Copy this generated public key to GitHub. Your key should end in "your.name@maine.edu" It is found in:
 ```
   cat ~/.ssh/id_ed25519.pub
 ```
