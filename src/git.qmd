@@ -57,10 +57,6 @@ Git is fundamentally different from older centralized version control systems li
 Other platforms: GitLab, Bitbucket, Gitea, etc.
 :::
 
-
-
-
-
 # Getting Started
 ## Installation
 
@@ -104,10 +100,6 @@ xcode-select --install
 :::
 :::
 
-
-
-
-
 ## Verify Installation
 
 **Verify installation:**
@@ -123,11 +115,6 @@ git version 2.45.0
 ::: {.callout-tip}
 As of 2025, Git 2.34+ is required for SSH commit signing. Make sure you're on a recent version.
 :::
-
-
-
-
-
 
 ## Initial Configuration
 
@@ -148,17 +135,6 @@ git config --list
 The `--global` flag applies settings to all repositories on your machine. Omit it to configure a specific repository.
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Core Concepts
 ## Repository Basics
 
@@ -170,10 +146,6 @@ The `--global` flag applies settings to all repositories on your machine. Omit i
 - **Working directory**: Your actual project files
 - **Staging area**: Files prepared for commit
 :::
-
-
-
-
 
 ## Creating a Repository
 ### New repository
@@ -189,10 +161,6 @@ Creates a hidden `.git` directory for tracking changes
 ```bash
 git clone https://github.com/user/repo.git
 ```
-
-
-
-
 
 ## Checking Status
 
@@ -210,10 +178,6 @@ Shows:
 - Unstaged changes (modified but not staged)
 - Untracked files (new files Git doesn't know about)
 :::
-
-
-
-
 
 # The Git Workflow
 ## Three-Stage Architecture
@@ -248,12 +212,6 @@ git add .
 Be careful with `git add .` - review what you're adding with `git status` first!
 :::
 
-
-
-
-
-
-
 ## Committing Changes
 
 Create a snapshot with a message:
@@ -268,10 +226,6 @@ git commit -m "Add user authentication feature"
 - First line < 50 characters
 - Add details in body if needed
 :::
-
-
-
-
 
 ## Viewing History
 
@@ -289,16 +243,6 @@ With graph visualization:
 ```bash
 git log --graph --oneline --all
 ```
-
-
-
-
-
-
-
-
-
-
 
 # Branching and Merging
 ## Why Branches?
@@ -343,10 +287,6 @@ List branches:
 git branch
 ```
 
-
-
-
-
 ## Switching Branches
 
 Old way:
@@ -362,12 +302,6 @@ git switch main
 ::: {.callout-note}
 `git switch` was introduced to make branch operations clearer, separating it from `checkout`'s other uses.
 :::
-
-
-
-
-
-
 
 ## Merging Branches
 
@@ -385,10 +319,6 @@ git merge feature-login
 ```bash
 git branch -d feature-login
 ```
-
-
-
-
 
 ## Merge Conflicts
 
@@ -410,13 +340,6 @@ Incoming branch content
 4. Stage the resolved files: `git add filename`
 5. Complete the merge: `git commit`
 
-
-
-
-
-
-
-
 # Remote Repositories
 ## Remote Operations
 
@@ -435,11 +358,6 @@ Remove a remote:
 git remote remove origin
 ```
 
-
-
-
-
-
 ## Pushing Changes
 
 Push to remote:
@@ -457,13 +375,6 @@ After setting upstream, just use:
 git push
 ```
 
-
-
-
-
-
-
-
 ## Pulling Changes
 
 Fetch and merge changes:
@@ -476,13 +387,6 @@ git pull origin main
 
 Use `git fetch` to see changes without merging them immediately.
 :::
-
-
-
-
-
-
-
 
 ## Pull with Rebase
 
@@ -497,13 +401,6 @@ This applies your commits on top of remote changes instead of creating a merge c
 ::: {.callout-tip}
 Use rebase for personal branches, merge for shared branches.
 :::
-
-
-
-
-
-
-
 
 # Setting Up SSH for GitHub
 ## Why Use SSH?
@@ -530,14 +427,6 @@ Use rebase for personal branches, merge for shared branches.
 GitHub deprecated password authentication in August 2021. Use SSH or Personal Access Tokens.
 :::
 
-
-
-
-
-
-
-
-
 ## Checking for Existing SSH Keys
 
 First, check if you already have SSH keys:
@@ -553,14 +442,6 @@ Look for files like:
 ::: {.callout-tip}
 Ed25519 keys are recommended in 2025 - they're more secure and faster than RSA.
 :::
-
-
-
-
-
-
-
-
 
 ## Generating a New SSH Key
 
@@ -1742,7 +1623,6 @@ git restore / git reset / git revert
    - Clone your fork using SSH
    - Add your name to Contributors.md
    - Create a pull request
-
 ## More Practice
 
 3. **Basic Git workflow**
