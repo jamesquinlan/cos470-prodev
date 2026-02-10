@@ -1,32 +1,51 @@
+/*
+TITLE: slides.css
+EDITOR: Jeffrey Fosgate
+EDITS MADE: February 5, 2026
+DESCRIPTION OF EDITS: Changed "font-family" for all slides to "'Times New Roman', serif"
+*/
+
+
 /* Title slide */
 
 .reveal .title-slide h1 {
     font-size: 3em;       /* Main title */
     color: #009688; /*Replaced Red with Teal */
     margin-bottom: 0.2em;
+    font-family: "Times New Roman", serif;
 }
 
 .reveal .title-slide h2 {
     font-size: 2em;       /* Subtitle */
     color: #aa0000;
     margin-top: 0;
+    font-family: "Times New Roman", serif;
 }
 
 .reveal .title-slide .author,
 .reveal .title-slide .date {
     font-size: 1em;       /* Author and date/lecture number */
+<<<<<<< Updated upstream:src/slides.css
     color: #00d9ff;
     margin-top: 1em; /*Changed 0.5em to 1em
+=======
+    color: #333333;
+    margin-top: 0.5em;
+    font-family: "Times New Roman", serif;
+>>>>>>> Stashed changes:slides/slides.css
 }
 
 /* Other slides */
 .reveal h1 {
     font-size: 2em;
+    font-family: "Times New Roman", serif;
 }
 .reveal h2 {
     font-size: 1.6em;
+    font-family: "Times New Roman", serif;
 }
 .reveal h3 {
     font-size: 1.3em;
+    font-family: "Times New Roman", serif;
 }
 

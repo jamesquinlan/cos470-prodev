@@ -1,3 +1,4 @@
+// Edit by Jeffrey Fosgate: Included $font-family-serif statement.
 /*-- scss:defaults --*/
 
 // Color palette
@@ -10,6 +11,7 @@ $text: #2c3e50;
 // Fonts "Segoe UI", "Helvetica Neue", 
 $font-family-sans-serif: Arial, sans-serif;
 $font-family-monospace: "Fira Code", "Source Code Pro", Monaco, monospace;
+$font-family-serif: "Times New Roman", serif; // Addition made by Jeffrey Fosgate - February 5, 2025
 
 // Font sizes - adjust these to change text size
 $presentation-font-size-root: 38px;  // Base font size (default is usually 40px)
