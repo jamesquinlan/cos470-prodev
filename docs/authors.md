@@ -1,1 +1,2 @@
 James Quinlan
+Ellis Fitzgerald
